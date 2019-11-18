@@ -48,3 +48,5 @@ lamps:
 ```
 
 Replace `lamp #1` with the label/name of the discovered lamps.
+
+Lamps will start to power up/down when the expression triggers over time, as defined by the fade configuration.
