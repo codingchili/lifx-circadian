@@ -1,0 +1,29 @@
+---
+fade:
+    day: 300
+    night: 900
+default_color:
+      # hue
+    - 0xCBCB
+      # saturation
+    - 0xFFFF
+      # brightness
+    - 0xAFFF
+      # kelvin.
+    - 2500
+lamps:
+    - name: "Candy"
+      schema:
+          - power: False
+            cron: "15 9 * * *"
+          - power: True
+            cron: "0 1 * * *"
+          - power: False
+            cron: "45 3 * * *"
+          - power: True
+            cron: "30 7 * * *"
+    - name: "LIFX Flory"
+      schema:
+          - power: False
+            cron: "30 8 * * *"
+
