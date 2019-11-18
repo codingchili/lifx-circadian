@@ -57,13 +57,13 @@ class CircadianLifx:
         with open(CONFIG_FILE, 'r') as file:
             config = yaml.safe_load(file)
 
-            self.configure_alarms(config)
+            self.configure_schedule(config)
             self.configure_fade(config)
             self.configure_color(config)
             log('Configuration completed.')
 
 
-    def configure_alarms(self, config):
+    def configure_schedule(self, config):
         log('scheduling lamps..')
         for lamp in config['lamps']:
             schemas = lamp['schema']
