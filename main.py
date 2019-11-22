@@ -102,7 +102,7 @@ class CircadianLifx:
     async def process_event(self, lamp, schema):
         keys = [HUE, SATURATION, BRIGHTNESS, TEMPERATURE]
 
-        log("processing event: {}".format(json.dumps(schema)))
+        log("event: {}".format(json.dumps(schema)))
 
         color_updated = False
         for key in keys:
@@ -123,21 +123,22 @@ class CircadianLifx:
     def configure_alarms(self, config):
         log('scheduling lamps..')
         for lamp in config['lamps']:
+            lamp_name = lamp['name']
             schemas = lamp['schema']
 
-            log("configuring lamp '{}'..".format(lamp['name']))
-            lamp = self.lifx.get_device_by_name(lamp['name'])
+            log("configuring lamp '{}'..".format(lamp_name))
+            lamp = self.lifx.get_device_by_name(lamp_name)
 
             for schema in schemas:
-                schema['name'] = lamp.get_label()
+                schema['name'] = lamp_name
                 cron = schema['cron']
                 power = schema['power']
-                print("\t\t- scheduled at '{}', power={}".format(cron, power))
-                crontab(cron, func=lambda: self.process_event(lamp, schema), start=True)
+                print("\t\t- {}".format(json.dumps(schema)))
+                crontab(cron, func=lambda schema=schema,lamp=lamp: self.process_event(lamp, schema), start=True)
 
                 # dev
-                if (schema['name'] == 'LIFX Flory'):
-                    crontab("* * * * * 0,15,30,45", func=lambda: self.process_event(lamp, schema), start=True)
+                #if (schema['name'] == 'LIFX Flory'):
+                #    crontab("* * * * * 0,15,30,45", func=lambda: self.process_event(lamp, schema), start=True)
 
 
 try:
