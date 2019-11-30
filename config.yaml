@@ -14,12 +14,11 @@ lamps:
           - power: True
             transition: 60
             cron: "40 7 * * * 0"
-#    - name: "LIFX Flory"
-#      schema:
-#          - power: True
-#            brightness: 0.5
-#            saturation: 1.0
-#            transition: 60
-#            hue: 299
-#            cron: "49 19 * * * 0"
+    - name: "LIFX Flory"
+      schema:
+          - power: True
+            brightness: 0.85
+            saturation: 1.0
+            transition: 30
+            cron: "08 19 * * * 0"
 

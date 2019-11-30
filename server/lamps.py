@@ -2,7 +2,6 @@ from lifxlan import *
 from aiocron import *
 from server.configuration import *
 import asyncio
-import math
 
 
 class CircadianLifx:
@@ -39,13 +38,13 @@ class CircadianLifx:
         transition = schema.get_transition()
 
         if schema.has_hue():
-            hue = schema.get_hue() * 182
+            hue = schema.get_hue()
 
         if schema.has_saturation():
-            saturation = math.trunc(schema.get_saturation() * 256 * 256 - 1)
+            saturation = schema.get_saturation()
 
         if schema.has_brightness():
-            brightness = math.trunc(schema.get_brightness() * 256 * 256 - 1)
+            brightness = schema.get_brightness()
 
         if schema.has_temperature():
             temperature = schema.get_temperature()

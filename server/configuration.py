@@ -1,6 +1,7 @@
 from server.log import log
 import yaml
 import json
+import math
 
 # yaml file with configuration.
 CONFIG_FILE = 'config.yaml'
@@ -64,19 +65,19 @@ class SchemaConfiguration:
         return self.name
 
     def get_transition(self):
-        return self['transition']
+        return sec_to_ms(self['transition'])
 
     def get_hue(self):
-        return self['hue']
+        return self['hue'] * 182
 
     def get_cron(self):
         return self['cron']
 
     def get_saturation(self):
-        return self['saturation']
+        return math.trunc(self['saturation'] * 256 * 256 - 1)
 
     def get_brightness(self):
-        return self['brightness']
+        return math.trunc(self['brightness'] * 256 * 256 - 1)
 
     def get_power(self):
         return self['power']
