@@ -18,13 +18,14 @@ def load_from_file():
     log("loading configuration from '{}'..".format(CONFIG_FILE))
     with open(CONFIG_FILE, 'r') as file:
         config = yaml.safe_load(file)
-        log('Configuration parsed.')
+        log('configuration parsed.')
         configurations = []
 
         for lamp in config['lamps']:
             lamp_config = LampConfiguration(lamp['name'])
             for schema in lamp['schema']:
                 lamp_config.add_schema(SchemaConfiguration(**schema))
+            configurations.append(lamp_config)
 
         return configurations
 
@@ -39,6 +40,9 @@ class LampConfiguration:
     def add_schema(self, schema):
         self.schemas.append(schema)
 
+    def get_schemas(self):
+        return self.schemas
+
     def get_name(self):
         return self.name
 
@@ -47,10 +51,17 @@ class SchemaConfiguration:
     """ holds configuration for a single trigger. """
 
     def __init__(self, **entries):
+        self.name = ''
         self.__dict__.update(entries)
 
     def __getitem__(self, item):
         return self.__dict__[item]
+
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
 
     def get_transition(self):
         return self['transition']
@@ -95,4 +106,4 @@ class SchemaConfiguration:
         return 'power' in self.__dict__
 
     def to_json(self):
-        return json.dumps(self)
+        return json.dumps(self.__dict__)

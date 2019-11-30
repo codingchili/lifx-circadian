@@ -2,6 +2,7 @@ import {html, PolymerElement} from '../node_modules/@polymer/polymer/polymer-ele
 import '../node_modules/@polymer/paper-tabs/paper-tabs.js'
 import '../node_modules/@polymer/iron-pages/iron-pages.js'
 import '../node_modules/@polymer/paper-card/paper-card.js'
+import '../node_modules/@polymer/paper-tooltip/paper-tooltip.js'
 import '../node_modules/@polymer/iron-icon/iron-icon.js'
 import '../node_modules/@polymer/iron-icons/iron-icons.js'
 
@@ -28,6 +29,10 @@ class LifxView extends PolymerElement {
                 
                 lifx-lamp {
                     margin: 16px;
+                }
+                
+                .tooltip-text {
+                    font-size: 1.4em;
                 }
                 
                 #footer {
@@ -95,7 +100,10 @@ class LifxView extends PolymerElement {
                 <template is="dom-if" if="[[authenticated]]">
                     <paper-card elevation="3" id="container">
                         <span class="lamps-header">
-                            <iron-icon class="interaction" icon="icons:refresh" on-click="discover"></iron-icon>        
+                            <iron-icon id="refresh" class="interaction" icon="icons:refresh" on-click="discover"></iron-icon>
+                            <paper-tooltip animation-delay="0" for="refresh">
+                                <span class="tooltip-text">Rediscover lamps</span>
+                            </paper-tooltip>        
                         </span>
                         <div id="lamps">
                             <lifx-lamp name="Candy"></lifx-lamp>

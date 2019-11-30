@@ -10,9 +10,7 @@
     "img/**",
     "package.json"
   ],
-  "extraDependencies": [
-    "node_modules/@webcomponents/webcomponentsjs/**"
-  ],
+  "extraDependencies": [],
   "moduleResolution": "node",
   "npm": true,
   "builds": [

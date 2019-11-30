@@ -9,13 +9,13 @@ class CircadianLifx:
     """ controls and schedules state updates to lifx lamps. """
 
     def __init__(self):
-        log('Discovering lamps..')
+        log('discovering lamps..')
         self.lifx = LifxLAN()
         self.jobs = []
 
         lights = self.lifx.get_lights()
         lights = ','.join(map(lambda light: "'{}'".format(light.get_label()), lights))
-        log("Discovered {}".format(lights))
+        log("discovered {}".format(lights))
 
     async def on(self, lamp, schema):
         transition = schema.get_transition()
@@ -86,15 +86,16 @@ class CircadianLifx:
     def configure_alarms(self, config):
         self.stop_jobs()
         log('scheduling lamps..')
+
         for lamp in config:
             lamp_name = lamp.get_name()
-            schemas = lamp.get_cron()
+            schemas = lamp.get_schemas()
 
             log("configuring lamp '{}'..".format(lamp_name))
             lamp = self.lifx.get_device_by_name(lamp_name)
 
             for schema in schemas:
-                schema['name'] = lamp_name
+                schema.set_name(lamp_name)
                 cron = schema.get_cron()
                 print("\t\t- {}".format(schema.to_json()))
 
