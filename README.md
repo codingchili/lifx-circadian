@@ -44,10 +44,10 @@ lamps:
             brightness: 0.5
             saturation: 1.0
             transition: 60
-            hue: 299
+            color: '#ff00cc'
             cron: "49 19 * * * 0""
 ```
 
-Replace `lamp #1` with the label/name of the discovered lamps.
+Replace lamp name with the label of the discovered lamps.
 
-Lamps will start to power up/down when the expression triggers over time, as defined by the fade configuration.
+Lamps will start to power up/down when the expression triggers over time, as defined by the transition configuration.
