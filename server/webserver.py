@@ -1,9 +1,14 @@
 from aiohttp import web
-from server import lamps
+from server import lamps, configuration
 
 root = './web/build/es6prod'
 routes = web.RouteTableDef()
+
+# discover lamps on the local network.
 lamps = lamps.CircadianLifx()
+
+# load lamp configuration and schedule timers.
+lamps.configure_alarms(configuration.load_from_file())
 
 
 async def index(request):
@@ -12,11 +17,19 @@ async def index(request):
 
 @routes.get('/lamps')
 async def list_lamps(request):
+    """ lists all discovered lamps, if discovery has not run in a while performs a new scan. """
     return web.json_response({'ok': True})
 
 
 @routes.post('/lamp/configure')
 async def configure_lamp(request):
+    """ configures a set of triggers on which to modify the state of a lamp. """
+    return web.json_response({'ok': True})
+
+
+@routes.post('/lamp/update')
+async def update_lamp(request):
+    """ updates the current state of a lamp, hue, brightness and saturation. """
     return web.json_response({'ok': True})
 
 

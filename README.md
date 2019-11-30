@@ -21,7 +21,7 @@ python main.py
 This is the sample configuration
 
 ```yaml
----
+
 ---  
 lamps:
     - name: "Candy"
