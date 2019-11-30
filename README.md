@@ -3,6 +3,10 @@ Small python script to control on/off for LIFX lamps using the LAN protocol. The
 
 More information on alternatives to monophasic sleep here: [polyphasic.net](https://polyphasic.net/)
 
+![screenshot sample](preview.png)
+
+_Web interface in progress._
+
 ### Installation
 
 Requires python 3.6.3+ for asyncio.
