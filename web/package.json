@@ -1,0 +1,28 @@
+{
+  "name": "beth-ui",
+  "version": "1.0.0",
+  "description": "broker ethereum web interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robin Duda <robin.duda@idainfront.se>",
+  "license": "MIT",
+  "dependencies": {
+    "@polymer/iron-collapse": "^3.0.1",
+    "@polymer/iron-icon": "^3.0.1",
+    "@polymer/iron-pages": "^3.0.1",
+    "@polymer/paper-button": "^3.0.1",
+    "@polymer/paper-card": "^3.0.1",
+    "@polymer/paper-checkbox": "^3.1.0",
+    "@polymer/paper-dialog": "^3.0.1",
+    "@polymer/paper-dialog-scrollable": "^3.0.1",
+    "@polymer/paper-input": "^3.0.2",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/paper-slider": "^3.0.1",
+    "@polymer/paper-swatch-picker": "^3.0.1",
+    "@polymer/paper-tabs": "^3.1.0",
+    "@polymer/paper-toast": "^3.0.1",
+    "@polymer/polymer": "^3.3.0"
+  }
+}
