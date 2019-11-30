@@ -1,4 +1,5 @@
 from server.log import log
+import colorsys
 import yaml
 import json
 import math
@@ -68,7 +69,10 @@ class SchemaConfiguration:
         return sec_to_ms(self['transition'])
 
     def get_hue(self):
-        return self['hue'] * 182
+        hex_color = self['hue'].lstrip('#')
+        rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+        hls = colorsys.rgb_to_hls(rgb[0], rgb[1], rgb[2])
+        return math.trunc(hls[0] * 360)
 
     def get_cron(self):
         return self['cron']
