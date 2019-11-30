@@ -30,9 +30,6 @@ class LifxControls extends PolymerElement {
     static get template() {
         return html`
             <style include="lifx-style">
-                :host {
-                    --lamp-hue: var(--lifx-color-theme);
-                }
                   
                 .hue {
                     margin-top: 22px !important;
@@ -78,7 +75,6 @@ class LifxControls extends PolymerElement {
     }
 
     _onColorChange() {
-        console.log('LAMP_HUE_CHANGE');
         this.style.setProperty("--lamp-hue", this.lamp.hue);
     }
 }

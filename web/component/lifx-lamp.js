@@ -14,7 +14,7 @@ class LifxLamp extends PolymerElement {
 
     constructor() {
         super();
-        this.triggers = [{}, {}, {}, {}, {}, {}];
+        this.triggers = [];
     }
 
     static get properties() {
@@ -121,7 +121,7 @@ class LifxLamp extends PolymerElement {
                     <span class="tooltip-text">Configure triggers for this lamp</span>
                 </paper-tooltip>
                 
-                <img id="bulb" src="/img/bulb.png">
+                <img id="bulb">
                 <!-- direct lamp controls -->
                 <lifx-control lamp="{{lamp}}"></lifx-control>
                 
@@ -154,6 +154,13 @@ class LifxLamp extends PolymerElement {
         console.log('remove alarm item')
     }
 
+    ready() {
+        super.ready();
+        setTimeout(() => {
+            this.shadowRoot.querySelector('#bulb').src = "./img/bulb.png";
+        }, 200);
+    }
+
     delete() {
         return (item) => {
             console.log(this);
@@ -168,8 +175,8 @@ class LifxLamp extends PolymerElement {
             saturation: 98,
             brightness: 33,
             transition: 60,
-            hue: '#00ff00',
-            cron: '30 7 * * ?'
+            hue: '#42a5f5',
+            cron: '30 7 * * *'
         });
         console.log('add new alarm item');
     }

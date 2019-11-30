@@ -1,0 +1,34 @@
+{
+  "root": "./",
+  "entrypoint": "index.html",
+  "fragments": [],
+  "sources": [
+    "index.html",
+    "component/**",
+    "style/**",
+    "manifest/**",
+    "img/**",
+    "package.json"
+  ],
+  "extraDependencies": [
+    "node_modules/@webcomponents/webcomponentsjs/**"
+  ],
+  "moduleResolution": "node",
+  "npm": true,
+  "builds": [
+    {
+      "name": "es6prod",
+      "preset": "es6-bundled",
+      "addServiceWorker": true
+    },
+    {
+      "name": "dev",
+      "addServiceWorker": false,
+      "js": {"minify": false, "compile": false},
+      "css": {"minify": false},
+      "html": {"minify": false},
+      "bundle": false,
+      "addPushManifest": false
+    }
+  ]
+}

@@ -2,6 +2,8 @@ import {html, PolymerElement} from '../node_modules/@polymer/polymer/polymer-ele
 import '../node_modules/@polymer/paper-tabs/paper-tabs.js'
 import '../node_modules/@polymer/iron-pages/iron-pages.js'
 import '../node_modules/@polymer/paper-card/paper-card.js'
+import '../node_modules/@polymer/iron-icon/iron-icon.js'
+import '../node_modules/@polymer/iron-icons/iron-icons.js'
 
 import './lifx-lamp.js'
 import './lifx-authentication.js'
@@ -87,19 +89,20 @@ class LifxView extends PolymerElement {
                 
             </style>
             <div>
-                <h2 id="header">
+                <span id="header">
                     LIFX - Circadian
-                </h2>
+                </span>
                 <template is="dom-if" if="[[authenticated]]">
                     <paper-card elevation="3" id="container">
-                        <span class="lamps-header">                  
+                        <span class="lamps-header">
+                            <iron-icon class="interaction" icon="icons:refresh" on-click="discover"></iron-icon>        
                         </span>
                         <div id="lamps">
                             <lifx-lamp name="Candy"></lifx-lamp>
                             <lifx-lamp name="Flory"></lifx-lamp>
                         </div>
                         <div class="lamps-footer">
-                            <div>Last scan 2019-11-29 14:01PM</div>
+                            <div>Last scan 2019-11-29 14:01:23 PM</div>
                             <div>Found 2 lamps</div>
                         </div>
                     </paper-card>
