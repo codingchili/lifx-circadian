@@ -43,6 +43,17 @@ styleElement.innerHTML =
             --paper-slider-knob-color: var(--lifx-color-theme);
             --paper-slider-pin-color:  var(--lifx-color-theme);
         }
+        
+        .label {
+            margin-left: 8px;
+            margin-top: 6px;
+            opacity: 0.76;
+        }
+        
+        .interaction:hover {
+            color: var(--lifx-color-theme);
+            cursor: pointer;
+        }
 
         ::-webkit-scrollbar {
           width: 6px;

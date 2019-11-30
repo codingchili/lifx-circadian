@@ -11,47 +11,76 @@ class LifxControls extends PolymerElement {
         super();
     }
 
+    static get properties() {
+        return {
+            lamp: {
+                type: Object,
+                notify: true
+            },
+            transition: {
+                type: Boolean
+            }
+        }
+    }
+
+    static get observers() {
+        return ['_onColorChange(lamp.hue)'];
+    }
+
     static get template() {
         return html`
             <style include="lifx-style">
-                #controls {
-                
+                :host {
+                    --lamp-hue: var(--lifx-color-theme);
+                }
+                  
+                .hue {
+                    margin-top: 22px !important;
                 }
                 
                 .control {
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: space-evenly;
                 }
                 
-                .hue {
-                    margin-top: 18px !important;
-                }
-                
-                .label {
-                    margin-left: 8px;
-                    margin-top: 6px;
+                paper-slider {
+                    --paper-slider-active-color: var(--lamp-hue);
+                    --paper-slider-secondary-color: var(--lamp-hue);
+                    --paper-slider-knob-color: var(--lamp-hue);
+                    --paper-slider-pin-color:  var(--lamp-hue);
                 }
             </style>
 
             <div id="controls">
                 <div class="control">
                     <span class="hue label">Hue</span>
-                    <paper-swatch-picker></paper-swatch-picker>
+                    <paper-swatch-picker color="{{lamp.hue}}"></paper-swatch-picker>
                 </div>
                 
                 <div class="control">
                     <span class="label">Saturation</span>
-                    <paper-slider pin value="50"></paper-slider>
+                    <paper-slider ignoreBarTouch pin value="{{lamp.saturation}}"></paper-slider>
                 </div>
                 
                 <div class="control">
                     <span class="label">Brightness</span>
-                    <paper-slider pin value="50"></paper-slider>
+                    <paper-slider ignoreBarTouch pin value="{{lamp.brightness}}"></paper-slider>
                 </div>
+                
+                <template is="dom-if" if="[[transition]]">
+                    <div class="control">
+                        <span class="label">Transition</span>
+                        <paper-slider ignoreBarTouch pin value="{{lamp.transition}}"></paper-slider><!--max-markers="300" step="5"-->
+                    </div>
+                </template>
             </div>
         `;
     }
 
+    _onColorChange() {
+        console.log('LAMP_HUE_CHANGE');
+        this.style.setProperty("--lamp-hue", this.lamp.hue);
+    }
 }
 
 customElements.define("lifx-control", LifxControls);
