@@ -115,7 +115,7 @@ class LifxView extends PolymerElement {
                         <span class="lamps-header">
                             <iron-icon id="refresh" style$="[[_visibility(updating)]]" icon="icons:refresh" on-click="update"></iron-icon>
                             <paper-tooltip animation-delay="0" for="refresh">
-                                <span class="tooltip-text">Rediscover lamps</span>
+                                <span class="tooltip-text">Updating..</span>
                             </paper-tooltip>        
                         </span>
                         <div id="lamps">
