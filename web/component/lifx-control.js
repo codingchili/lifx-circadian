@@ -24,14 +24,14 @@ class LifxControls extends PolymerElement {
     }
 
     static get observers() {
-        return ['_onColorChange(lamp.hue)'];
+        return ['_onColorChange(color)'];
     }
 
     static get template() {
         return html`
             <style include="lifx-style">
                   
-                .hue {
+                .color {
                     margin-top: 22px !important;
                 }
                 
@@ -41,17 +41,17 @@ class LifxControls extends PolymerElement {
                 }
                 
                 paper-slider {
-                    --paper-slider-active-color: var(--lamp-hue);
-                    --paper-slider-secondary-color: var(--lamp-hue);
-                    --paper-slider-knob-color: var(--lamp-hue);
-                    --paper-slider-pin-color:  var(--lamp-hue);
+                    --paper-slider-active-color: var(--lamp-color);
+                    --paper-slider-secondary-color: var(--lamp-color);
+                    --paper-slider-knob-color: var(--lamp-color);
+                    --paper-slider-pin-color:  var(--lamp-color);
                 }
             </style>
 
             <div id="controls">
                 <div class="control">
-                    <span class="hue label">Hue</span>
-                    <paper-swatch-picker color="{{lamp.hue}}"></paper-swatch-picker>
+                    <span class="color label">Hue</span>
+                    <paper-swatch-picker color="{{color}}"></paper-swatch-picker>
                 </div>
                 
                 <div class="control">
@@ -74,8 +74,16 @@ class LifxControls extends PolymerElement {
         `;
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        this.color = this.lamp.color;
+        this._onColorChange();
+    }
+
     _onColorChange() {
-        this.style.setProperty("--lamp-hue", this.lamp.hue);
+        // shadowed because two-way binding on the color picker overwrites the original value.
+        this.lamp.color = this.color;
+        this.style.setProperty("--lamp-color", this.lamp.color);
     }
 }
 

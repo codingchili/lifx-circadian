@@ -21,6 +21,7 @@ class LifxLamp extends PolymerElement {
         return {
             lamp: {
                 type: 'Object',
+                notify: true,
                 value: {
                     name: "Unnamed Lamp"
                 }
@@ -178,7 +179,6 @@ class LifxLamp extends PolymerElement {
     }
 
     apply() {
-        console.log(this.triggers);
         this.$.schema.close();
     }
 

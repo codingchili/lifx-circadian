@@ -100,18 +100,19 @@ class LifxView extends PolymerElement {
                 <template is="dom-if" if="[[authenticated]]">
                     <paper-card elevation="3" id="container">
                         <span class="lamps-header">
-                            <iron-icon id="refresh" class="interaction" icon="icons:refresh" on-click="discover"></iron-icon>
+                            <iron-icon id="refresh" class="interaction" icon="icons:refresh" on-click="update"></iron-icon>
                             <paper-tooltip animation-delay="0" for="refresh">
                                 <span class="tooltip-text">Rediscover lamps</span>
                             </paper-tooltip>        
                         </span>
                         <div id="lamps">
-                            <lifx-lamp name="Candy"></lifx-lamp>
-                            <lifx-lamp name="Flory"></lifx-lamp>
+                            <template is="dom-repeat" items="[[lamps]]">
+                                <lifx-lamp lamp="[[item]]"></lifx-lamp>
+                            </template>
                         </div>
                         <div class="lamps-footer">
-                            <div>Last scan 2019-11-29 14:01:23 PM</div>
-                            <div>Found 2 lamps</div>
+                            <div>Last scan [[lastScan]]</div>
+                            <div>Found [[lamps.length]] lamps</div>
                         </div>
                     </paper-card>
                 </template>
@@ -130,13 +131,26 @@ class LifxView extends PolymerElement {
     ready() {
         super.ready();
         this.authenticated = true;
+        this.lamps = [];
 
         setTimeout(() => {
             let authenticator = this.shadowRoot.getElementById('authenticator');
             if (authenticator) {
                 authenticator.onAuthenticated(this.onAuthenticated.bind(this));
             }
+            this.update();
         }, 0);
+    }
+
+    update() {
+        fetch('/lamps')
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                this.set('lamps', data);
+                this.lastScan = new Date().toUTCString();
+            });
     }
 
     onAuthenticated(e) {

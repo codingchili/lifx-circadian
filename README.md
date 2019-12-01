@@ -13,6 +13,9 @@ Requires python 3.6.3+ for asyncio.
 
 ```console
 pip install aiocron, lifxlan, pyyaml
+cd web
+npm install && polymer build
+cd ..
 python main.py
 ```
 

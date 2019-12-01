@@ -1,5 +1,6 @@
 from aiohttp import web
 from server import lamps, configuration
+import json
 
 root = './web/build/es6prod'
 routes = web.RouteTableDef()
@@ -8,7 +9,8 @@ routes = web.RouteTableDef()
 lifx = lamps.CircadianLifx()
 
 # load lamp configuration and schedule timers.
-lifx.configure_alarms(configuration.load_from_file())
+config = configuration.load_from_file()
+lifx.configure_alarms(config)
 
 
 async def index(request):
@@ -22,12 +24,16 @@ async def list_lamps(request):
     response = []
 
     for light in lights:
-        response.append({
-            'name': light.get_label(),
-            'color': light.get_color()
-            #'schemas': configuration.get()? # get from config by name?
-        })
+        name = light.get_label()
+        color, saturation, brightness = configuration.color_transform(light.get_color())
 
+        response.append({
+            'name': name,
+            'color': color,
+            'saturation': saturation,
+            'brightness': brightness,
+            'schemas': list(map(lambda entry: entry.__dict__, config[name].get_schemas()))
+        })
     return web.json_response(response)
 
 

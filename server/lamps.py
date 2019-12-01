@@ -80,16 +80,20 @@ class CircadianLifx:
                 job.stop()
             self.jobs = []
 
+    def get_device_by_name(self, name):
+        for light in self.lights:
+            if light.get_label() == name:
+                return device
+
     def configure_alarms(self, config):
         self.stop_jobs()
         log('scheduling lamps..')
 
-        for lamp in config:
-            lamp_name = lamp.get_name()
-            schemas = lamp.get_schemas()
+        for lamp_name in config:
+            schemas = config[lamp_name].get_schemas()
 
             log("configuring lamp '{}'..".format(lamp_name))
-            lamp = self.lifx.get_device_by_name(lamp_name)
+            lamp = self.get_device_by_name(lamp_name)
 
             for schema in schemas:
                 schema.set_name(lamp_name)

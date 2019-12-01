@@ -16,18 +16,40 @@ def ms_to_sec(ms):
     return ms / 1000
 
 
+def to_hex(decimal):
+    result = ""
+    for value in decimal:
+        value = math.trunc(value * 255)
+        hexadecimal = str(hex(value))[2:]
+        if len(hexadecimal) == 1:
+            hexadecimal = "0" + hexadecimal
+        result += hexadecimal
+    return result
+
+
+def color_transform(color):
+    """ transforms a lifxlan color object to HexSL """
+    hue = min(color[0] / 182 / 360, 1.0)
+    hex_color = to_hex(colorsys.hls_to_rgb(hue, 0.5, 1.0))
+    return [
+        '#' + str(hex_color),
+        color[1] / (256 * 256 - 1) * 100,
+        color[2] / (256 * 256 - 1) * 100
+    ]
+
+
 def load_from_file():
     log("loading configuration from '{}'..".format(CONFIG_FILE))
     with open(CONFIG_FILE, 'r') as file:
         config = yaml.safe_load(file)
         log('configuration parsed.')
-        configurations = []
+        configurations = {}
 
         for lamp in config['lamps']:
             lamp_config = LampConfiguration(lamp['name'])
             for schema in lamp['schema']:
                 lamp_config.add_schema(SchemaConfiguration(**schema))
-            configurations.append(lamp_config)
+            configurations[lamp['name']] = lamp_config
 
         return configurations
 
@@ -112,3 +134,4 @@ class SchemaConfiguration:
 
     def to_json(self):
         return json.dumps(self.__dict__)
+
