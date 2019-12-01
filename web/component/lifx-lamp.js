@@ -150,10 +150,6 @@ class LifxLamp extends PolymerElement {
         this.$.schema.open();
     }
 
-    remove(e) {
-        console.log('remove alarm item')
-    }
-
     ready() {
         super.ready();
         setTimeout(() => {
