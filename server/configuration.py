@@ -69,10 +69,10 @@ class SchemaConfiguration:
         return sec_to_ms(self['transition'])
 
     def get_hue(self):
-        hex_color = self['hue'].lstrip('#')
+        hex_color = self['color'].lstrip('#')
         rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
         hls = colorsys.rgb_to_hls(rgb[0], rgb[1], rgb[2])
-        return math.trunc(hls[0] * 360)
+        return math.trunc(hls[0] * 360) * 182  # adjust for 0-65535 range.
 
     def get_cron(self):
         return self['cron']
@@ -99,7 +99,7 @@ class SchemaConfiguration:
         return 'brightness' in self.__dict__
 
     def has_hue(self):
-        return 'hue' in self.__dict__
+        return 'color' in self.__dict__
 
     def has_saturation(self):
         return 'saturation' in self.__dict__

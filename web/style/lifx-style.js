@@ -5,7 +5,7 @@ styleElement.innerHTML =
         * {
             font-family: 'Open Sans', sans-serif;
             font-size: 14px;
-            --lifx-color-theme: #82004f;
+            --lifx-color-theme: #006765;
         }
 
         paper-tabs {
@@ -67,6 +67,12 @@ styleElement.innerHTML =
         ::-webkit-scrollbar-thumb:hover {
           background: #b30000;
         }
+        
+        ::selection {
+            background: var(--lifx-color-theme);
+            color: #fff;
+        }
+        
     </style>
   </template>`;
 styleElement.register('lifx-style');

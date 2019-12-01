@@ -11,10 +11,13 @@ class CircadianLifx:
         log('discovering lamps..')
         self.lifx = LifxLAN()
         self.jobs = []
+        self.lights = self.lifx.get_lights()
 
-        lights = self.lifx.get_lights()
-        lights = ','.join(map(lambda light: "'{}'".format(light.get_label()), lights))
-        log("discovered {}".format(lights))
+        labels = ','.join(map(lambda light: "'{}'".format(light.get_label()), self.lights))
+        log("discovered {}".format(labels))
+
+    def get_lights(self):
+        return self.lights
 
     async def on(self, lamp, schema):
         transition = schema.get_transition()
@@ -29,12 +32,7 @@ class CircadianLifx:
         await asyncio.sleep(ms_to_sec(transition))
 
     def set_color(self, lamp, schema):
-        current = lamp.get_color()
-
-        hue = current[0]
-        saturation = current[1]
-        brightness = current[2]
-        temperature = current[3]
+        hue, saturation, brightness, temperature = lamp.get_color()
         transition = schema.get_transition()
 
         if schema.has_hue():

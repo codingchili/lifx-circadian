@@ -20,5 +20,6 @@ lamps:
             brightness: 0.85
             saturation: 1.0
             transition: 30
-            cron: "08 19 * * * 0"
+            color: '#ff00cc'
+            cron: "32 19 * * * 0"
 
