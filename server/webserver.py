@@ -30,6 +30,7 @@ async def list_lamps(request):
         response.append({
             'name': name,
             'color': color,
+            'power': True if light.get_power() > 0 else False,
             'saturation': saturation,
             'brightness': brightness,
             'schemas': list(map(lambda entry: entry.__dict__, config[name].get_schemas()))
@@ -46,6 +47,7 @@ async def configure_lamp(request):
 @routes.post('/lamp/update')
 async def update_lamp(request):
     """ updates the current state of a lamp, hue, brightness and saturation. """
+    print(await request.json())
     return web.json_response({'ok': True})
 
 

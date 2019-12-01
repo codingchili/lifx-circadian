@@ -122,16 +122,16 @@ class LifxLamp extends PolymerElement {
                     <span class="tooltip-text">Configure triggers for this lamp</span>
                 </paper-tooltip>
                 
-                <img id="bulb">
+                <img id="bulb" style="[[_powerFilter(lamp.power)]]" on-click="_toggle">
                 <!-- direct lamp controls -->
-                <lifx-control lamp="{{lamp}}"></lifx-control>
+                <lifx-control lamp="{{lamp}}" autoupdate></lifx-control>
                 
                 <!-- hide, show dialog on schedule/timer icon click -->
                 <paper-dialog id="schema" modal>
                     <h2>[[lamp.name]]</h2>
                     <iron-icon class="interaction add" icon="icons:alarm-add" on-click="add"></iron-icon>
                     <paper-dialog-scrollable>
-                        <template is="dom-repeat" items="[[triggers]]">
+                        <template is="dom-repeat" items="[[lamp.schemas]]">
                             <lifx-trigger trigger="{{item}}" delete="[[delete()]]"></lifx-trigger>
                         </template>
                     </paper-dialog-scrollable>
@@ -140,10 +140,7 @@ class LifxLamp extends PolymerElement {
                         <paper-button class="apply" on-click="apply" raised>APPLY</paper-button>
                     </div>
                 </paper-dialog>
-                <!-- save button -->
             </paper-card>
-            
-            <!-- toggle on/off on img click -->
         `;
     }
 
@@ -160,7 +157,6 @@ class LifxLamp extends PolymerElement {
 
     delete() {
         return (item) => {
-            console.log(this);
             this.triggers = this.triggers.filter((e) => {
                 return e !== item;
             });
@@ -175,7 +171,14 @@ class LifxLamp extends PolymerElement {
             hue: '#42a5f5',
             cron: '30 7 * * *'
         });
-        console.log('add new alarm item');
+    }
+
+    _powerFilter() {
+        return (this.lamp.power) ? '' : 'filter: grayscale(1);'
+    }
+
+    _toggle() {
+        this.set('lamp.power', !this.lamp.power);
     }
 
     apply() {

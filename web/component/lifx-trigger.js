@@ -2,6 +2,7 @@ import {PolymerElement, html} from '../node_modules/@polymer/polymer/polymer-ele
 import '../node_modules/@polymer/paper-slider/paper-slider.js'
 import '../node_modules/@polymer/paper-input/paper-input.js'
 import '../node_modules/@polymer/paper-button/paper-button.js'
+import '../node_modules/@polymer/paper-checkbox/paper-checkbox.js'
 import '../node_modules/@polymer/iron-icon/iron-icon.js'
 import '../node_modules/@polymer/iron-icons/iron-icons.js'
 
@@ -31,11 +32,20 @@ class LifxTrigger extends PolymerElement {
                     left: 0;
                     margin: 16px auto auto;
                 }
+                
+                paper-checkbox {
+                    margin-top: 6px;
+                }
             </style>
 
             <paper-input placeholder="cron expression" value="{{trigger.cron}}"></paper-input>
             <lifx-control lamp="{{trigger}}" transition></lifx-control>
-
+            
+            <div class="control">
+                <span class="label">Power</span>
+                <paper-checkbox value="value" checked$="{{trigger.power}}"></paper-checkbox>
+            </div>
+            
             <iron-icon class="interaction remove" icon="alarm-off" on-click="_delete"></iron-icon>            
         `;
     }

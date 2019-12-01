@@ -50,6 +50,11 @@ styleElement.innerHTML =
             opacity: 0.76;
         }
         
+        .control {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        
         .interaction:hover {
             color: var(--lifx-color-theme);
             cursor: pointer;

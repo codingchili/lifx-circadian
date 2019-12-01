@@ -31,6 +31,18 @@ class LifxView extends PolymerElement {
                     margin: 16px;
                 }
                 
+                @keyframes spin { 
+                100% 
+                    { 
+                        transform:rotate(360deg); 
+                    } 
+                }
+                
+                #refresh {
+                     animation: spin 0.5s linear infinite;
+                     transition: 0.2s opacity;
+                }
+                
                 .tooltip-text {
                     font-size: 1.4em;
                 }
@@ -60,6 +72,7 @@ class LifxView extends PolymerElement {
                     right: 32px;
                     display: block;
                     padding: 8px;
+                    height: 16px;
                 }
                 
                 .lamps-footer {
@@ -100,7 +113,7 @@ class LifxView extends PolymerElement {
                 <template is="dom-if" if="[[authenticated]]">
                     <paper-card elevation="3" id="container">
                         <span class="lamps-header">
-                            <iron-icon id="refresh" class="interaction" icon="icons:refresh" on-click="update"></iron-icon>
+                            <iron-icon id="refresh" style$="[[_visibility(updating)]]" icon="icons:refresh" on-click="update"></iron-icon>
                             <paper-tooltip animation-delay="0" for="refresh">
                                 <span class="tooltip-text">Rediscover lamps</span>
                             </paper-tooltip>        
@@ -131,6 +144,7 @@ class LifxView extends PolymerElement {
     ready() {
         super.ready();
         this.authenticated = true;
+        this.updating = false;
         this.lamps = [];
 
         setTimeout(() => {
@@ -140,9 +154,16 @@ class LifxView extends PolymerElement {
             }
             this.update();
         }, 0);
+
+        setInterval(() => this.update(), 5000);
+    }
+
+    _visibility() {
+        return this.updating ? 'opacity: 1.0;' : 'opacity: 0;';
     }
 
     update() {
+        this.updating = true;
         fetch('/lamps')
             .then((res) => {
                 return res.json()
@@ -150,6 +171,7 @@ class LifxView extends PolymerElement {
             .then((data) => {
                 this.set('lamps', data);
                 this.lastScan = new Date().toUTCString();
+                setTimeout(() => this.updating = false, 400);
             });
     }
 

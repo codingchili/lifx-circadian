@@ -19,12 +19,15 @@ class LifxControls extends PolymerElement {
             },
             transition: {
                 type: Boolean
+            },
+            autoupdate: {
+                type: Boolean
             }
         }
     }
 
     static get observers() {
-        return ['_onColorChange(color)'];
+        return ['_onColorChange(color)', '_onLampColorChange(lamp.color)', '_onValueChanged(lamp.saturation, lamp.brightness, lamp.color)'];
     }
 
     static get template() {
@@ -78,12 +81,35 @@ class LifxControls extends PolymerElement {
         super.connectedCallback();
         this.color = this.lamp.color;
         this._onColorChange();
+        console.log('loaded');
+    }
+
+    ready() {
+        super.ready();
+        console.log('ready');
+    }
+
+    _onLampColorChange() {
+        this.set('color', this.lamp.color);
     }
 
     _onColorChange() {
         // shadowed because two-way binding on the color picker overwrites the original value.
-        this.lamp.color = this.color;
+        this.set('lamp.color', this.color);
         this.style.setProperty("--lamp-color", this.lamp.color);
+    }
+
+    _onValueChanged(saturation, brightness, color) {
+        console.log(`s=${saturation} b=${brightness} c=${color}`);
+
+        fetch('/lamp/update', {
+            method: 'post',
+            body: JSON.stringify(this.lamp)
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+        });
     }
 }
 
