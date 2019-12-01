@@ -38,11 +38,6 @@ class LifxControls extends PolymerElement {
                     margin-top: 22px !important;
                 }
                 
-                .control {
-                    display: flex;
-                    justify-content: space-evenly;
-                }
-                
                 paper-slider {
                     --paper-slider-active-color: var(--lamp-color);
                     --paper-slider-secondary-color: var(--lamp-color);
@@ -81,12 +76,6 @@ class LifxControls extends PolymerElement {
         super.connectedCallback();
         this.color = this.lamp.color;
         this._onColorChange();
-        console.log('loaded');
-    }
-
-    ready() {
-        super.ready();
-        console.log('ready');
     }
 
     _onLampColorChange() {
