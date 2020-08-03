@@ -76,7 +76,8 @@ class SchemaConfiguration:
 
     def __init__(self, **entries):
         self.name = ''
-        self.__dict__.update(entries)
+        if (entries is not None):
+            self.__dict__.update(entries)
 
     def __getitem__(self, item):
         return self.__dict__[item]
@@ -88,7 +89,13 @@ class SchemaConfiguration:
         return self.name
 
     def get_transition(self):
-        return sec_to_ms(self['transition'])
+        return sec_to_ms(self.get_safe('transition', 1))
+
+    def get_safe(self, key, default):
+        if key in self.__dict__:
+            return self[key]
+        else:
+            return default
 
     def get_hue(self):
         hex_color = self['color'].lstrip('#')
@@ -96,8 +103,17 @@ class SchemaConfiguration:
         hls = colorsys.rgb_to_hls(rgb[0], rgb[1], rgb[2])
         return math.trunc(hls[0] * 360) * 182  # adjust for 0-65535 range.
 
+    def set_hue(self, color):
+        self.color = color
+
     def get_cron(self):
         return self['cron']
+
+    def set_saturation(self, saturation):
+        self.saturation = saturation
+
+    def set_brightness(self, brightness):
+        self.brightness = brightness
 
     def get_saturation(self):
         return math.trunc(self['saturation'] * 256 * 256 - 1)

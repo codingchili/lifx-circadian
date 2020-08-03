@@ -1,0 +1,144 @@
+{
+  "abilities": {
+    "E": {
+      "abilityLevel": 0,
+      "displayName": "Condemn",
+      "id": "VayneCondemn",
+      "rawDescription": "GeneratedTip_Spell_VayneCondemn_Description",
+      "rawDisplayName": "GeneratedTip_Spell_VayneCondemn_DisplayName"
+    },
+    "Passive": {
+      "displayName": "Night Hunter",
+      "id": "VaynePassive",
+      "rawDescription": "GeneratedTip_Passive_VaynePassive_Description",
+      "rawDisplayName": "GeneratedTip_Passive_VaynePassive_DisplayName"
+    },
+    "Q": {
+      "abilityLevel": 0,
+      "displayName": "Tumble",
+      "id": "VayneTumble",
+      "rawDescription": "GeneratedTip_Spell_VayneTumble_Description",
+      "rawDisplayName": "GeneratedTip_Spell_VayneTumble_DisplayName"
+    },
+    "R": {
+      "abilityLevel": 0,
+      "displayName": "Final Hour",
+      "id": "VayneInquisition",
+      "rawDescription": "GeneratedTip_Spell_VayneInquisition_Description",
+      "rawDisplayName": "GeneratedTip_Spell_VayneInquisition_DisplayName"
+    },
+    "W": {
+      "abilityLevel": 0,
+      "displayName": "Silver Bolts",
+      "id": "VayneSilveredBolts",
+      "rawDescription": "GeneratedTip_Spell_VayneSilveredBolts_Description",
+      "rawDisplayName": "GeneratedTip_Spell_VayneSilveredBolts_DisplayName"
+    }
+  },
+  "championStats": {
+    "abilityPower": 0.0,
+    "armor": 36.70100021362305,
+    "armorPenetrationFlat": 0.0,
+    "armorPenetrationPercent": 1.0,
+    "attackDamage": 65.34539794921875,
+    "attackRange": 550.0,
+    "attackSpeed": 0.7071821689605713,
+    "bonusArmorPenetrationPercent": 1.0,
+    "bonusMagicPenetrationPercent": 1.0,
+    "cooldownReduction": -0.07588235288858414,
+    "critChance": 0.0,
+    "critDamage": 200.0,
+    "currentHealth": 744.8203125,
+    "healthRegenRate": 0.9491499662399292,
+    "lifeSteal": 0.0,
+    "magicLethality": 0.0,
+    "magicPenetrationFlat": 0.0,
+    "magicPenetrationPercent": 1.0,
+    "magicResist": 31.13249969482422,
+    "maxHealth": 744.8203125,
+    "moveSpeed": 477.5,
+    "physicalLethality": 0.0,
+    "resourceMax": 311.07501220703127,
+    "resourceRegenRate": 2.020437240600586,
+    "resourceType": "MANA",
+    "resourceValue": 311.07501220703127,
+    "spellVamp": 0.0,
+    "tenacity": 0.0
+  },
+  "currentGold": 2101.25,
+  "fullRunes": {
+    "generalRunes": [
+      {
+        "displayName": "Grasp of the Undying",
+        "id": 8437,
+        "rawDescription": "perk_tooltip_GraspOfTheUndying",
+        "rawDisplayName": "perk_displayname_GraspOfTheUndying"
+      },
+      {
+        "displayName": "Font of Life",
+        "id": 8463,
+        "rawDescription": "perk_tooltip_FontOfLife",
+        "rawDisplayName": "perk_displayname_FontOfLife"
+      },
+      {
+        "displayName": "Second Wind",
+        "id": 8444,
+        "rawDescription": "perk_tooltip_SecondWind",
+        "rawDisplayName": "perk_displayname_SecondWind"
+      },
+      {
+        "displayName": "Overgrowth",
+        "id": 8451,
+        "rawDescription": "perk_tooltip_Overgrowth",
+        "rawDisplayName": "perk_displayname_Overgrowth"
+      },
+      {
+        "displayName": "Magical Footwear",
+        "id": 8304,
+        "rawDescription": "perk_tooltip_MagicalFootwear",
+        "rawDisplayName": "perk_displayname_MagicalFootwear"
+      },
+      {
+        "displayName": "Cosmic Insight",
+        "id": 8347,
+        "rawDescription": "perk_tooltip_CosmicInsight",
+        "rawDisplayName": "perk_displayname_CosmicInsight"
+      }
+    ],
+    "keystone": {
+      "displayName": "Grasp of the Undying",
+      "id": 8437,
+      "rawDescription": "perk_tooltip_GraspOfTheUndying",
+      "rawDisplayName": "perk_displayname_GraspOfTheUndying"
+    },
+    "primaryRuneTree": {
+      "displayName": "Resolve",
+      "id": 8400,
+      "rawDescription": "perkstyle_tooltip_7204",
+      "rawDisplayName": "perkstyle_displayname_7204"
+    },
+    "secondaryRuneTree": {
+      "displayName": "Inspiration",
+      "id": 8300,
+      "rawDescription": "perkstyle_tooltip_7203",
+      "rawDisplayName": "perkstyle_displayname_7203"
+    },
+    "statRunes": [
+      {
+        "id": 5007,
+        "rawDescription": "perk_tooltip_StatModCooldownReductionScaling"
+      },
+      {
+        "id": 5002,
+        "rawDescription": "perk_tooltip_StatModArmor"
+      },
+      {
+        "id": 5001,
+        "rawDescription": "perk_tooltip_StatModHealthScaling"
+      }
+    ]
+  },
+  "level": 4,
+  "summonerName": "chilimannen"
+}
+

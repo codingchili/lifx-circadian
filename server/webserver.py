@@ -1,17 +1,8 @@
 from aiohttp import web
 from server import lamps, configuration
-import json
 
 root = './web/build/es6prod'
 routes = web.RouteTableDef()
-
-# discover lamps on the local network.
-lifx = lamps.CircadianLifx()
-
-# load lamp configuration and schedule timers.
-config = configuration.load_from_file()
-lifx.configure_alarms(config)
-
 
 async def index(request):
     return web.FileResponse('{}/index.html'.format(root))
@@ -47,11 +38,24 @@ async def configure_lamp(request):
 @routes.post('/lamp/update')
 async def update_lamp(request):
     """ updates the current state of a lamp, hue, brightness and saturation. """
+
+    # todo: convert from API to LIFX values?
+    # todo: call set_color in lamps.py?
+
     print(await request.json())
     return web.json_response({'ok': True})
 
 
 def serve(web_interface):
+    # discover lamps on the local network.
+    global lifx
+    lifx = lamps.CircadianLifx()
+
+    # load lamp configuration and schedule timers.
+    global config
+    config = configuration.load_from_file()
+    lifx.configure_alarms(config)
+
     app = web.Application()
     router = app.router
     router.add_routes(routes)

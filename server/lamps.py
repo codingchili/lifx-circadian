@@ -83,7 +83,7 @@ class CircadianLifx:
     def get_device_by_name(self, name):
         for light in self.lights:
             if light.get_label() == name:
-                return device
+                return light
 
     def configure_alarms(self, config):
         self.stop_jobs()
